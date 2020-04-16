@@ -33,8 +33,6 @@ const withName = Comp => {
   return NewComponent;
 };
 
-
-
 function withLogF(tag) {
   function withTag(Comp) {
     console.log(tag + ' : ' + Comp.name + "渲染了");
@@ -50,6 +48,7 @@ const withLog = tag => {
   }
   return withTag;
 };
+
 // 更简洁的写法
 // const withLog = tag => {
 //   return Comp => {

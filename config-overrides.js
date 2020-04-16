@@ -1,17 +1,18 @@
-const { injectBabelPlugin } = require("react-app-rewired");
+const {
+  override,
+  fixBabelImports,
+  addDecoratorsLegacy
+  // addLessLoader,
+} = require("customize-cra");
 
-module.exports = function override(config, env) {
-  // antd按需加载
-  config = injectBabelPlugin(
-    ["import", { libraryName: "antd", libraryDirectory: "es", style: "css" }],
-    config
-  );
+module.exports = override(
+  fixBabelImports("import", {
+      libraryName: "antd", libraryDirectory: "es", style: 'css' // change importing css to less
+  }),
+  addDecoratorsLegacy()
+  // addLessLoader({
+  //   javascriptEnabled: true,
+  //   modifyVars: { "@primary-color": "#1DA57A" }
+  // })
 
-  // 添加装饰器能力
-  config = injectBabelPlugin(
-    ["@babel/plugin-proposal-decorators", { legacy: true }],
-    config
-  );
-
-  return config;
-};
+);
